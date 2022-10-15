@@ -28,7 +28,7 @@ class AddSpaceDialogContainer extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 15),
         child: SizedBox(
-          height: 370,
+          
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -40,7 +40,7 @@ class AddSpaceDialogContainer extends StatelessWidget {
                 color: Colors.grey,
               ),
               const Text(
-                "Stay Connected, Work , Share & Collaborate",
+                "Stay Connected, Work, Share & Collaborate",
                 style: TextStyle(fontSize: 13),
               ),
               CollabworkxTextInput(

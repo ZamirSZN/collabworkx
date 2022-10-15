@@ -8,7 +8,7 @@ class DigitalSpaceIndexWidget extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: SizedBox(
-        height: 400,
+        height: 500,
         width: 200,
         child: Container(
           color: Colors.grey.shade300,
@@ -43,7 +43,9 @@ class DigitalSpaceIndexWidget extends StatelessWidget {
                   children: const [
                     Text("Computer science"),
                     Icon(Icons.arrow_right_rounded),
-                    Text("Lobby")
+                    Chip(
+                      label: Text("Lobby"),
+                    )
                   ],
                 ),
               ),

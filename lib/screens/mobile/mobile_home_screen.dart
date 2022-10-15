@@ -66,7 +66,9 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
               return const LeftHomePage();
             }),
             right: Builder(
-              builder: (context) => const RightHomePage(),
+              builder: (context) {
+                return const RightHomePage();
+              },
             ),
             main: Builder(
               builder: (context) {

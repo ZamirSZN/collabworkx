@@ -4,8 +4,6 @@ import 'package:collabworkx/widgets/digital_space_index_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import '../../widgets/overlapping_panels.dart';
-
 class CenterHomePage extends StatefulWidget {
   const CenterHomePage({super.key});
 
@@ -71,13 +69,20 @@ class _CenterHomePageState extends State<CenterHomePage> {
                 title: const Text(
                   "Digital Spaces",
                 ),
+                // actions: [
+                //   IconButton(
+                //       onPressed: () {
+                //         OverlappingPanels.of(context)?.reveal(RevealSide.right);
+                //       },
+                //       icon: const Icon(Icons.people_alt_rounded))
+                // ],
                 elevation: 1,
                 leading: IconButton(
                   icon: const Icon(
                     Icons.menu,
                   ),
                   onPressed: () {
-                    OverlappingPanels.of(context)?.reveal(RevealSide.left);
+                    // OverlappingPanels.of(context)?.reveal(RevealSide.left);
                   },
                 ),
                 bottom: const PreferredSize(

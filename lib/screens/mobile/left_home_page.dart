@@ -5,6 +5,8 @@ import 'package:collabworkx/widgets/spaces_avatar_widget.dart';
 import 'package:collabworkx/widgets/channels_view.dart';
 import 'package:flutter/material.dart';
 
+import '../../widgets/overlapping_panels.dart';
+
 class LeftHomePage extends StatefulWidget {
   const LeftHomePage({Key? key}) : super(key: key);
 
@@ -42,7 +44,11 @@ class _LeftHomePageState extends State<LeftHomePage> {
                 Column(
                   children: [
                     NavigationButton(
-                        onPressed: () {}, iconData: Icons.home_filled),
+                        onPressed: () {
+                          OverlappingPanels.of(context)
+                              ?.reveal(RevealSide.main);
+                        },
+                        iconData: Icons.home),
                     NavigationButton(
                         onPressed: () {}, iconData: Icons.mail_rounded),
                     NavigationButton(

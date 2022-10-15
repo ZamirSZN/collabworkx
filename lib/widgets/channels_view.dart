@@ -24,10 +24,13 @@ class ChannelsView extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: const Image(
-                    image: AssetImage(collabImage),
+                Padding(
+                  padding: const EdgeInsets.only(left: 6.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: const Image(
+                      image: AssetImage(collabImage),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -115,14 +118,11 @@ class ChannelsView extends StatelessWidget {
                                       context, deviceScreen);
                                 },
                               ),
-                               ListTile(
-                                leading: Icon(Icons.alarm),
-                                title: Text("Set a reminder"),
-                                
-
+                              ListTile(
+                                leading: const Icon(Icons.alarm),
+                                title: const Text("Set a reminder"),
                                 onTap: () {
-                                  setReminderBottomSheet(
-                                      context, deviceScreen);
+                                  setReminderBottomSheet(context, deviceScreen);
                                 },
                               ),
                             ],

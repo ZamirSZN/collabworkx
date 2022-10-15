@@ -1,3 +1,4 @@
+import 'package:collabworkx/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class NavigationButton extends StatelessWidget {
@@ -11,12 +12,13 @@ class NavigationButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: CircleAvatar(
-        radius: 25,
+        backgroundColor: collabGrey,
+        radius: 23,
         child: IconButton(
             onPressed: onPressed(),
             icon: Icon(
               iconData,
-              size: 28,
+              size: 24,
               color: Colors.white,
             )),
       ),
