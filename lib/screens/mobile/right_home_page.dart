@@ -1,4 +1,4 @@
-import 'package:collabworkx/utils/global_variables.dart';
+import 'package:collabworkx/utils/fakedata.dart';
 import 'package:flutter/material.dart';
 
 class RightHomePage extends StatelessWidget {
@@ -33,6 +33,9 @@ class RightHomePage extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              const SizedBox(
+                                height: 5,
+                              ),
                               Row(
                                 children: [
                                   const Text(
@@ -44,7 +47,7 @@ class RightHomePage extends StatelessWidget {
                                   ),
                                   const Expanded(
                                       child: Text(
-                                    " Miguel77",
+                                    " miguel77",
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 20),
                                   )),
@@ -148,7 +151,7 @@ class RightHomePage extends StatelessWidget {
                                           color: Colors.grey),
                                     ),
                                   ),
-                                  ...users.map((user) => ListTile(
+                                  ...activeUsers.map((user) => ListTile(
                                         leading: const CircleAvatar(
                                           backgroundColor: Colors.white,
                                           radius: 15,

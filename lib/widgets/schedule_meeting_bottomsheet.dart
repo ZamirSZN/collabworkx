@@ -27,9 +27,14 @@ class IndustryBottomSheetContainer extends StatefulWidget {
 
 class _IndustryBottomSheetContainerState
     extends State<IndustryBottomSheetContainer> {
+
+
+  // dispose controllers very important
   @override
   Widget build(BuildContext context) {
     final TextEditingController titleController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
     final Size deviceScreen = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Container(
@@ -118,7 +123,7 @@ class _IndustryBottomSheetContainerState
               CollabworkxTextInput(
                   hintText: "Add Emails",
                   textInputType: TextInputType.text,
-                  textEditingController: titleController),
+                  textEditingController: emailController),
               const Padding(
                 padding: EdgeInsets.only(top: 8.0, left: 5),
                 child: Align(
@@ -132,7 +137,7 @@ class _IndustryBottomSheetContainerState
               CollabworkxInput(
                 hintText: "Optional",
                 textInputType: TextInputType.visiblePassword,
-                textEditingController: titleController,
+                textEditingController: passwordController,
                 preffixIconData: Icons.password_rounded,
                 suffixIconData: Icons.visibility,
                 onSuffixIconPress: () {},
@@ -146,7 +151,9 @@ class _IndustryBottomSheetContainerState
                   CollabIconRoundButton(
                     color: Colors.red,
                     iconData: Icons.close,
-                    onPressed: () {},
+                    onPressed: () {
+                           Navigator.pop(context);
+                    },
                     text: "Discard",
                   ),
                   CollabIconRoundButton(

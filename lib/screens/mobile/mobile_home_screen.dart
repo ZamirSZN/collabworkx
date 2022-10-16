@@ -1,6 +1,8 @@
 import 'package:collabworkx/screens/mobile/center_home_page.dart';
+import 'package:collabworkx/screens/mobile/chat_screen.dart';
 import 'package:collabworkx/screens/mobile/left_home_page.dart';
 import 'package:collabworkx/screens/mobile/right_home_page.dart';
+import 'package:collabworkx/utils/global_variables.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/overlapping_panels.dart';
@@ -14,8 +16,13 @@ class MobileHomeScreen extends StatefulWidget {
 
 class _MobileHomeScreenState extends State<MobileHomeScreen> {
   Offset footerOffset = const Offset(0, 1);
+
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => setState(() {}),
+      // dont fucking think of removing this callback except you want sleepless nights
+    );
     return Scaffold(
       // bottomNavigationBar: ClipRRect(
       //   borderRadius: const BorderRadius.only(
@@ -62,31 +69,42 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
       body: Stack(
         children: [
           OverlappingPanels(
+            onSideChange: (value) {
+              print(value);
+            },
             left: Builder(builder: (context) {
               return const LeftHomePage();
             }),
+            main: Builder(
+              builder: (context) {
+                return showCenterPage();
+              },
+            ),
             right: Builder(
               builder: (context) {
                 return const RightHomePage();
               },
             ),
-            main: Builder(
-              builder: (context) {
-                return const CenterHomePage();
-              },
-            ),
-            onSideChange: (side) {
-              setState(() {
-                if (side == RevealSide.main) {
-                  footerOffset = const Offset(0, 1);
-                } else if (side == RevealSide.left) {
-                  footerOffset = const Offset(0, 0);
-                }
-              });
-            },
+
+            // onSideChange: (side) {
+            //   setState(() {
+            //     if (side == RevealSide.main) {
+            //       footerOffset = const Offset(0, 1);
+            //     } else if (side == RevealSide.left) {
+            //       footerOffset = const Offset(0, 0);
+            //     }
+            //   });
+            // },
           ),
         ],
       ),
     );
+  }
+
+  Widget showCenterPage() {
+    if (isChatScreenShown == true) {
+      return const ChatScreen();
+    }
+    return const CenterHomePage();
   }
 }

@@ -19,20 +19,5 @@ const List<Widget> pages = [
 
 const String collabImage = "images/collabworkx.png";
 
-
-final users = [
-  {
-    "name": "Zamir",
-    "avatar": "https://avatars.githubusercontent.com/u/5024388?v=4"
-  },
-  {
-    "name": "FakeUser",
-    "avatar":
-        "https://pbs.twimg.com/profile_images/1015894689873047552/tKix6k5V_400x400.jpg"
-  },
-  {
-    "name": "RealUser",
-    "avatar":
-        "https://pbs.twimg.com/profile_images/1380809190738907136/CIuQ8y84_400x400.jpg"
-  },
-];
+bool isChatScreenShown = false;
+bool isDmViewShown = true;

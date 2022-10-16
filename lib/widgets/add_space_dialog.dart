@@ -26,9 +26,9 @@ class AddSpaceDialogContainer extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 15),
+        padding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 15),
         child: SizedBox(
-          
+          height: 320,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -50,7 +50,7 @@ class AddSpaceDialogContainer extends StatelessWidget {
               ),
               CollabworkxTextInput(
                 hintText: "Description",
-                textEditingController: spaceNameTextController,
+                textEditingController: spaceDescriptionTextController,
                 textInputType: TextInputType.name,
               ),
               const Padding(
@@ -68,7 +68,9 @@ class AddSpaceDialogContainer extends StatelessWidget {
                   CollabIconRoundButton(
                     color: Colors.red,
                     iconData: Icons.close,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     text: "Close",
                   ),
                   CollabIconRoundButton(

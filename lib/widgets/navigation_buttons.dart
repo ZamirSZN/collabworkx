@@ -5,7 +5,7 @@ class NavigationButton extends StatelessWidget {
   const NavigationButton(
       {super.key, required this.iconData, required this.onPressed});
   final IconData iconData;
-  final Function onPressed;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class NavigationButton extends StatelessWidget {
         backgroundColor: collabGrey,
         radius: 23,
         child: IconButton(
-            onPressed: onPressed(),
+            onPressed: onPressed,
             icon: Icon(
               iconData,
               size: 24,

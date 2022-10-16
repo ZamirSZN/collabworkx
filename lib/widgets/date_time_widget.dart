@@ -1,5 +1,6 @@
 import 'package:collabworkx/widgets/collab_Icon_round_button.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DateTimeWidget extends StatefulWidget {
   const DateTimeWidget({
@@ -14,6 +15,8 @@ class DateTimeWidget extends StatefulWidget {
 
 class _DateTimeWidgetState extends State<DateTimeWidget> {
   String? _time;
+  DateTime? _dateTime;
+  final dateFormat = DateFormat.yMMMd();
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +42,12 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
                   const Text("Date: "),
                   CollabIconRoundButton(
                       color: Colors.grey,
-                      text: "28/10/2020",
-                      // text: _time == null
-                      //     ? TimeOfDay.now().toString()
-                      //     : _time.toString(),
-                      onPressed: () {},
+                      text: _dateTime == null
+                          ? dateFormat.format(DateTime.now())
+                          : dateFormat.format(_dateTime!),
+                      onPressed: () {
+                        pickDate(context);
+                      },
                       iconData: Icons.calendar_month),
                 ],
               ),
@@ -73,6 +77,21 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
     showTimePicker(context: context, initialTime: TimeOfDay.now()).then((time) {
       setState(() {
         _time = time.toString();
+      });
+    });
+  }
+
+  void pickDate(BuildContext context) {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2022),
+            lastDate: DateTime(2050))
+        .then((date) {
+      setState(() {
+        _dateTime = DateUtils.dateOnly(
+          date!,
+        );
       });
     });
   }

@@ -1,6 +1,8 @@
+import 'package:collabworkx/screens/mobile/digital_space_details_screen.dart';
 import 'package:collabworkx/utils/colors.dart';
 import 'package:collabworkx/widgets/add_space_dialog.dart';
 import 'package:collabworkx/widgets/digital_space_index_widget.dart';
+import 'package:collabworkx/widgets/overlapping_panels.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -69,20 +71,20 @@ class _CenterHomePageState extends State<CenterHomePage> {
                 title: const Text(
                   "Digital Spaces",
                 ),
-                // actions: [
-                //   IconButton(
-                //       onPressed: () {
-                //         OverlappingPanels.of(context)?.reveal(RevealSide.right);
-                //       },
-                //       icon: const Icon(Icons.people_alt_rounded))
-                // ],
+                actions: [
+                  IconButton(
+                      onPressed: () {
+                        OverlappingPanels.of(context)?.reveal(RevealSide.right);
+                      },
+                      icon: const Icon(Icons.people_alt_rounded))
+                ],
                 elevation: 1,
                 leading: IconButton(
                   icon: const Icon(
                     Icons.menu,
                   ),
                   onPressed: () {
-                    // OverlappingPanels.of(context)?.reveal(RevealSide.left);
+                    OverlappingPanels.of(context)?.reveal(RevealSide.left);
                   },
                 ),
                 bottom: const PreferredSize(
@@ -96,13 +98,22 @@ class _CenterHomePageState extends State<CenterHomePage> {
               ),
               SliverGrid(
                 delegate: SliverChildBuilderDelegate(
-                  childCount: 30,
-                  (context, index) => const Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: DigitalSpaceIndexWidget(),
+                  childCount: 5,
+                  (context, index) => Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: GestureDetector(
+                      child: const DigitalSpaceIndexWidget(),
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const DigitalSpaceDetailsScreen(
+                              title: "Community"),
+                        ));
+                      },
+                    ),
                   ),
                 ),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 1.4 / 2,
                   crossAxisCount: 2,
                 ),
               ),

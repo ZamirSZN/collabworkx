@@ -31,6 +31,7 @@ class _IndustryBottomSheetContainerState
   @override
   Widget build(BuildContext context) {
     final TextEditingController titleController = TextEditingController();
+    final TextEditingController locationController = TextEditingController();
     final Size deviceScreen = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Container(
@@ -118,14 +119,16 @@ class _IndustryBottomSheetContainerState
               CollabworkxTextInput(
                   hintText: "Optional",
                   textInputType: TextInputType.text,
-                  textEditingController: titleController),
+                  textEditingController: locationController),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   CollabIconRoundButton(
                     color: Colors.red,
                     iconData: Icons.close,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     text: "Discard",
                   ),
                   CollabIconRoundButton(
@@ -141,13 +144,5 @@ class _IndustryBottomSheetContainerState
         ),
       ),
     );
-  }
-
-  void pickTime(BuildContext context) {
-    showTimePicker(context: context, initialTime: TimeOfDay.now()).then((time) {
-      setState(() {
-        _time = time.toString();
-      });
-    });
   }
 }
