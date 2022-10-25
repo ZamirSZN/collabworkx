@@ -1,4 +1,4 @@
-import 'package:collabworkx/widgets/collab_Icon_round_button.dart';
+import 'package:collabworkx/widgets/collab_round_icon_button.dart';
 import 'package:collabworkx/widgets/collab_dropdown.dart';
 import 'package:collabworkx/widgets/date_time_widget.dart';
 import 'package:collabworkx/widgets/text_field.dart';
@@ -27,14 +27,20 @@ class IndustryBottomSheetContainer extends StatefulWidget {
 
 class _IndustryBottomSheetContainerState
     extends State<IndustryBottomSheetContainer> {
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
+  @override
+  void dispose() {
+    super.dispose();
+    titleController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
 
-  // dispose controllers very important
   @override
   Widget build(BuildContext context) {
-    final TextEditingController titleController = TextEditingController();
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
     final Size deviceScreen = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Container(
@@ -152,7 +158,7 @@ class _IndustryBottomSheetContainerState
                     color: Colors.red,
                     iconData: Icons.close,
                     onPressed: () {
-                           Navigator.pop(context);
+                      Navigator.pop(context);
                     },
                     text: "Discard",
                   ),

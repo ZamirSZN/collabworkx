@@ -1,4 +1,5 @@
 import 'package:collabworkx/utils/fakedata.dart';
+import 'package:collabworkx/widgets/contacts_widget.dart';
 import 'package:flutter/material.dart';
 
 class RightHomePage extends StatelessWidget {
@@ -47,7 +48,7 @@ class RightHomePage extends StatelessWidget {
                                   ),
                                   const Expanded(
                                       child: Text(
-                                    " miguel77",
+                                    " miguel_enrique",
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 20),
                                   )),
@@ -128,11 +129,15 @@ class RightHomePage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(24),
                                   color: Colors.grey[200]),
                               padding: const EdgeInsets.all(7),
-                              child: const Icon(Icons.person_add_alt_1),
+                              child: const Icon(Icons.person_add),
                             ),
-                            title: const Text("New Group DM"),
+                            title: const Text("Invite to Space"),
                             onTap: () {},
                           ),
+                        ),
+                        const SizedBox(
+                          height: 30,
+                          child: Center(child: Text("No events today")),
                         ),
                         Expanded(
                           child: Container(
@@ -140,30 +145,31 @@ class RightHomePage extends StatelessWidget {
                             child: Material(
                               child: ListView(
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(
+                                  Padding(
+                                    padding: const EdgeInsets.only(
                                         top: 16, left: 16, right: 16),
                                     child: Text(
-                                      'MEMBERS - 3',
-                                      style: TextStyle(
+                                      "MEMBERS - ${activeUsers.length}",
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 12,
                                           color: Colors.grey),
                                     ),
                                   ),
-                                  ...activeUsers.map((user) => ListTile(
-                                        leading: const CircleAvatar(
-                                          backgroundColor: Colors.white,
-                                          radius: 15,
-                                          child: Icon(
-                                            Icons.account_circle_rounded,
-                                            color: Colors.grey,
-                                          ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  ...activeUsers.map((user) => Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 7.0, horizontal: 10),
+                                        child: ContactsWidget(
+                                          name: user["name"]!,
+                                          avatar: user["avatar"]!,
+                                          onTap: () {},
+                                          status: user["status"]!,
+                                          isActive: user["isActive"],
                                         ),
-                                        horizontalTitleGap: 0,
-                                        title: Text(user["name"]!),
-                                        onTap: () {},
-                                      )),
+                                      ))
                                 ],
                               ),
                             ),

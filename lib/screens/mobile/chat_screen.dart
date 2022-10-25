@@ -9,7 +9,8 @@ import 'package:intl/intl.dart';
 import '../../utils/fakedata.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+  const ChatScreen({super.key, required this.title});
+  final String title;
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -20,10 +21,16 @@ class _ChatScreenState extends State<ChatScreen> {
       TextEditingController();
 
   @override
+  void dispose() {
+    messageTextFieldController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text("CollabWorkx Space"),
+          title: const Text("Space"),
           backgroundColor: collabGrey,
           leading: IconButton(
             icon: const Icon(Icons.menu),
@@ -72,9 +79,19 @@ class _ChatScreenState extends State<ChatScreen> {
                   elevation: 1,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      message.text,
-                      style: const TextStyle(fontSize: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          message.sender,
+                          style: const TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          message.text,
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -110,9 +127,11 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void sendMessage() {
     final userMessage = Message(
-        text: messageTextFieldController.text,
-        date: DateTime.now(),
-        isSentByMe: true);
+      sender: "Me",
+      text: messageTextFieldController.text,
+      date: DateTime.now(),
+      isSentByMe: true,
+    );
     messages.add(userMessage);
   }
 }

@@ -1,9 +1,11 @@
 import 'package:collabworkx/screens/mobile/login_screen.dart';
+import 'package:collabworkx/screens/mobile/mobile_home_screen.dart';
+import 'package:collabworkx/screens/mobile/responsive_layout.dart';
+import 'package:collabworkx/screens/web/web_screen.dart';
 import 'package:collabworkx/utils/colors.dart';
 import 'package:collabworkx/widgets/loading_indicator.dart';
 import 'package:collabworkx/widgets/text_field.dart';
 import 'package:flutter/material.dart';
-
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -190,6 +192,12 @@ class _SignupScreenState extends State<SignupScreen> {
                     //   });
                     //   signupUser();
                     // }
+
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ResponsiveLayout(
+                          mobileScreenLayout: MobileHomeScreen(),
+                          webScreenLayout: WebScreenLayout()),
+                    ));
                   },
                   child: Container(
                     height: 50,

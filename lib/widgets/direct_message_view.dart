@@ -1,15 +1,27 @@
 import 'package:collabworkx/utils/fakedata.dart';
+import 'package:collabworkx/widgets/contacts_widget.dart';
 import 'package:collabworkx/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
-class DirectMessageView extends StatelessWidget {
+class DirectMessageView extends StatefulWidget {
   // final String spaceViewImageUrl;
-  DirectMessageView({
+  const DirectMessageView({
     super.key,
     // required this.spaceViewImageUrl,
   });
 
+  @override
+  State<DirectMessageView> createState() => _DirectMessageViewState();
+}
+
+class _DirectMessageViewState extends State<DirectMessageView> {
   final TextEditingController dmTextController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    dmTextController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +47,11 @@ class DirectMessageView extends StatelessWidget {
                   height: 15,
                 ),
                 SizedBox(
-                  width: deviceScreen.width / 1.5,
+                  width: deviceScreen.width / 1.6,
                   child: CollabworkxInput(
                     isPassword: false,
                     onSuffixIconPress: () {},
-                    preffixIconData: Icons.people,
+                    preffixIconData: Icons.mail,
                     suffixIconData: Icons.search,
                     validator: (p0) {
                       return null;
@@ -49,18 +61,18 @@ class DirectMessageView extends StatelessWidget {
                     textInputType: TextInputType.text,
                   ),
                 ),
-                ...activeUsers.map((user) => ListTile(
-                      leading: const CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 25,
-                        child: Icon(
-                          Icons.account_circle_rounded,
-                          color: Colors.grey,
-                        ),
+                const SizedBox(
+                  height: 20,
+                ),
+                ...dmUSers.map((user) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 7.0),
+                      child: ContactsWidget(
+                        name: user["name"]!,
+                        avatar: user["avatar"]!,
+                        onTap: () {},
+                        status: user["status"]!,
+                        isActive: user["isActive"],
                       ),
-                      horizontalTitleGap: 10,
-                      title: Text(user["name"]!),
-                      onTap: () {},
                     ))
               ],
             )),

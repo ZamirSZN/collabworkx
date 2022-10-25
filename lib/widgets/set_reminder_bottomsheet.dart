@@ -1,4 +1,4 @@
-import 'package:collabworkx/widgets/collab_Icon_round_button.dart';
+import 'package:collabworkx/widgets/collab_round_icon_button.dart';
 import 'package:collabworkx/widgets/collab_dropdown.dart';
 import 'package:collabworkx/widgets/date_time_widget.dart';
 import 'package:collabworkx/widgets/text_field.dart';
@@ -26,12 +26,18 @@ class IndustryBottomSheetContainer extends StatefulWidget {
 
 class _IndustryBottomSheetContainerState
     extends State<IndustryBottomSheetContainer> {
-  String? _time;
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    titleController.dispose();
+    locationController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController titleController = TextEditingController();
-    final TextEditingController locationController = TextEditingController();
     final Size deviceScreen = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Container(

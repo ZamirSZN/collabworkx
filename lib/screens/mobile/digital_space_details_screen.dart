@@ -1,6 +1,6 @@
 import 'package:collabworkx/models/messages.dart';
 import 'package:collabworkx/utils/colors.dart';
-import 'package:collabworkx/widgets/collab_Icon_round_button.dart';
+import 'package:collabworkx/widgets/collab_round_icon_button.dart';
 import 'package:collabworkx/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -20,10 +20,16 @@ class _DigitalSpaceDetailsScreenState extends State<DigitalSpaceDetailsScreen> {
       TextEditingController();
 
   @override
+  void dispose() {
+    super.dispose();
+    messageTextFieldController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text("CollabWorkx Space"),
+          title: Text("${widget.title} Space"),
           backgroundColor: collabGrey,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
@@ -87,6 +93,7 @@ class _DigitalSpaceDetailsScreenState extends State<DigitalSpaceDetailsScreen> {
 
   void sendMessage() {
     final userMessage = Message(
+        sender: "Me",
         text: messageTextFieldController.text,
         date: DateTime.now(),
         isSentByMe: true);

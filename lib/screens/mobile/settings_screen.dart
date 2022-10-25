@@ -1,3 +1,4 @@
+import 'package:collabworkx/utils/colors.dart';
 import 'package:collabworkx/widgets/enter_round_button.dart';
 import 'package:collabworkx/widgets/round_icon_with_background.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,8 +11,14 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Settings"),
-      ),
+          title: const Text("Settings"),
+          backgroundColor: collabGrey,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          )),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -23,12 +30,9 @@ class SettingsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 35,
-                ),
                 const Text(
                   "Account",
-                  style: TextStyle(fontSize: 25),
+                  style: TextStyle(fontSize: 30),
                 ),
                 const SizedBox(
                   height: 20,
@@ -36,11 +40,12 @@ class SettingsScreen extends StatelessWidget {
                 ListTile(
                   horizontalTitleGap: 20,
                   contentPadding: const EdgeInsets.all(0),
-                  leading: const FlutterLogo(
-                    size: 30,
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: const Image(image: AssetImage("images/user3.jpg")),
                   ),
                   title: const Text(
-                    "Mubarak Lawal",
+                    "Miguel Enrique",
                   ),
                   subtitle: const Text("Personal info"),
                   trailing: EnterRoundButton(
@@ -51,8 +56,31 @@ class SettingsScreen extends StatelessWidget {
                   height: 30,
                 ),
                 const Text(
+                  "Status",
+                  style: TextStyle(fontSize: 30),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const ListTile(
+                  horizontalTitleGap: 20,
+                  contentPadding: EdgeInsets.all(0),
+                  leading: RoundIconWithBackground(
+                    icon: Icons.alarm,
+                    backgroundColor: Color.fromRGBO(232, 248, 225, 1),
+                    iconColor: Color.fromRGBO(29, 164, 234, 1),
+                  ),
+                  title: Text(
+                    "Last Seen",
+                  ),
+                  subtitle: Text("02: 41 AM"),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                const Text(
                   "Settings",
-                  style: TextStyle(fontSize: 25),
+                  style: TextStyle(fontSize: 30),
                 ),
               ],
             ),

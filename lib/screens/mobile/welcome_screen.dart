@@ -42,12 +42,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ],
               ),
-              const FlutterLogo(
-                size: 350,
-              ),
               const SizedBox(
-                height: 50,
+                height: 100,
               ),
+              Transform.scale(
+                scale: 1.5,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: const Image(
+                      image: AssetImage("images/collabworkx_logo.png"),
+                    )),
+              ),
+              const Spacer(),
               const Text(
                 "Welcome to Collabworkx",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),

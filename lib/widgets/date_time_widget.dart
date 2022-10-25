@@ -1,4 +1,4 @@
-import 'package:collabworkx/widgets/collab_Icon_round_button.dart';
+import 'package:collabworkx/widgets/collab_round_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -14,7 +14,6 @@ class DateTimeWidget extends StatefulWidget {
 }
 
 class _DateTimeWidgetState extends State<DateTimeWidget> {
-  String? _time;
   DateTime? _dateTime;
   final dateFormat = DateFormat.yMMMd();
 
@@ -75,9 +74,7 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
 
   void pickTime(BuildContext context) {
     showTimePicker(context: context, initialTime: TimeOfDay.now()).then((time) {
-      setState(() {
-        _time = time.toString();
-      });
+      setState(() {});
     });
   }
 

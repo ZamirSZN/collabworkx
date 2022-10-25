@@ -1,3 +1,5 @@
+import 'package:collabworkx/models/digital_spaces.dart';
+import 'package:collabworkx/screens/mobile/settings_screen.dart';
 import 'package:collabworkx/services/get_spaces_requests.dart';
 import 'package:collabworkx/utils/global_variables.dart';
 import 'package:collabworkx/widgets/channels_view.dart';
@@ -17,17 +19,17 @@ class _LeftHomePageState extends State<LeftHomePage> {
   @override
   void initState() {
     super.initState();
-    // loadSpaces();
+    loadMySpaces();
   }
 
-  loadSpaces() async {
-    var spaces = await DigitalSpacesRequest().getDigitalSpaces();
+  loadMySpaces() async {
+    var spaces = await DigitalSpacesRequest().getMySpaces();
     setState(() {
-      digitalSpace = spaces;
+      myDigitalSpace = spaces;
     });
   }
 
-  String spaceImageUrl = "";
+  DigitalSpace? currentSpace;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,7 @@ class _LeftHomePageState extends State<LeftHomePage> {
       (_) => setState(() {}),
       // dont fucking think of removing this callback except you want sleepless nights
     );
+
     final Size deviceScreen = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -55,48 +58,57 @@ class _LeftHomePageState extends State<LeftHomePage> {
                             isChatScreenShown = false;
                             isDmViewShown = true;
                           },
-                          iconData: Icons.home_rounded),
-                      NavigationButton(
-                          onPressed: () {
-                            isChatScreenShown = true;
-                            isDmViewShown = false;
-                          },
-                          iconData: Icons.workspaces_outlined),
+                          iconData: Icons.workspaces_rounded),
                       SizedBox(
-                        height: deviceScreen.height / 1.6,
+                        height: deviceScreen.height / 1.26,
                         width: 70,
                         child: ListView.builder(
-                          itemCount: digitalSpace?.length ?? 0,
+                          itemCount: myDigitalSpace?.length ?? 0,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 5.0),
                               child: SpaceAvatarWidget(
-                                  onPressed: () {
-                                    spaceImageUrl =
-                                        digitalSpace![index].thumbnailUrl!;
-                                  },
-                                  image: digitalSpace![index].thumbnailUrl!),
+                                onPressed: () {
+                                  currentSpace = myDigitalSpace![index];
+                                  showChatandDMView();
+                                },
+                                image: myDigitalSpace![index].spaceImage!,
+                              ),
                             );
                           },
                         ),
                       ),
                       NavigationButton(
-                          onPressed: () {}, iconData: Icons.settings),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const SettingsScreen(),
+                            ));
+                          },
+                          iconData: Icons.settings),
                     ],
                   ),
                 ),
-                showChannelSorDMView(),
+                isShowChannelSorDMView(),
               ],
             )),
       ),
     );
   }
 
-  showChannelSorDMView() {
+  isShowChannelSorDMView() {
     if (isDmViewShown == true) {
-      return DirectMessageView();
+      return const DirectMessageView();
     }
-    return const ChannelsView();
+    return ChannelsView(
+      spaceDescription: currentSpace!.spaceDescription!,
+      spaceImage: currentSpace!.spaceImage!,
+      spaceName: currentSpace!.spaceTitle!,
+    );
+  }
+
+  void showChatandDMView() {
+    isChatScreenShown = true;
+    isDmViewShown = false;
   }
 }

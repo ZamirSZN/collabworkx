@@ -1,5 +1,7 @@
 import 'package:collabworkx/screens/mobile/digital_space_details_screen.dart';
+import 'package:collabworkx/services/get_spaces_requests.dart';
 import 'package:collabworkx/utils/colors.dart';
+import 'package:collabworkx/utils/global_variables.dart';
 import 'package:collabworkx/widgets/add_space_dialog.dart';
 import 'package:collabworkx/widgets/digital_space_index_widget.dart';
 import 'package:collabworkx/widgets/overlapping_panels.dart';
@@ -24,8 +26,20 @@ class _CenterHomePageState extends State<CenterHomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    loadAllSpaces();
+  }
+
+  loadAllSpaces() async {
+    var allSpaces = await DigitalSpacesRequest().getDigitalSpaces();
+    setState(() {
+      allDigitalSpaces = allSpaces;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final Size deviceScreen = MediaQuery.of(context).size;
     return Scaffold(
         floatingActionButton: isFabBig
             // this might be a wrong way to use the animated switcher
@@ -67,6 +81,10 @@ class _CenterHomePageState extends State<CenterHomePage> {
             // floatHeaderSlivers: true,
             slivers: [
               SliverAppBar(
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10))),
                 backgroundColor: collabGrey,
                 title: const Text(
                   "Digital Spaces",
@@ -87,26 +105,39 @@ class _CenterHomePageState extends State<CenterHomePage> {
                     OverlappingPanels.of(context)?.reveal(RevealSide.left);
                   },
                 ),
-                bottom: const PreferredSize(
-                    preferredSize: Size(10, 10),
-                    child: Chip(
-                        label: Text(
-                            "Platform made to manage teams and sync collaborations"))),
+                bottom: PreferredSize(
+                    preferredSize: const Size(10, 10),
+                    child: Column(
+                      children: const [
+                        Chip(
+                            label: Text(
+                                "Platform made to manage teams and sync collaborations")),
+                        SizedBox(
+                          height: 5,
+                        )
+                      ],
+                    )),
                 floating: true,
                 snap: true,
                 expandedHeight: 100,
               ),
               SliverGrid(
                 delegate: SliverChildBuilderDelegate(
-                  childCount: 5,
+                  childCount: allDigitalSpaces?.length ?? 0,
                   (context, index) => Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: GestureDetector(
-                      child: const DigitalSpaceIndexWidget(),
+                      child: DigitalSpaceIndexWidget(
+                        spaceTitle: allDigitalSpaces![index].spaceTitle!,
+                        spaceDescription:
+                            allDigitalSpaces![index].spaceDescription!,
+                        spaceIndustry: allDigitalSpaces![index].spaceIndustry!,
+                        spaceImage: allDigitalSpaces![index].spaceImage!,
+                      ),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const DigitalSpaceDetailsScreen(
-                              title: "Community"),
+                          builder: (context) => DigitalSpaceDetailsScreen(
+                              title: allDigitalSpaces![index].spaceTitle!),
                         ));
                       },
                     ),

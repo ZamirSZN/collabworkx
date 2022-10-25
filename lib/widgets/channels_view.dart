@@ -1,4 +1,3 @@
-import 'package:collabworkx/utils/global_variables.dart';
 import 'package:collabworkx/widgets/schedule_meeting_bottomsheet.dart';
 import 'package:collabworkx/widgets/set_reminder_bottomsheet.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +6,14 @@ class ChannelsView extends StatelessWidget {
   // final String spaceViewImageUrl;
   const ChannelsView({
     super.key,
+    required this.spaceName,
+    required this.spaceImage,
+    required this.spaceDescription,
     // required this.spaceViewImageUrl,
   });
+  final String spaceName;
+  final String spaceImage;
+  final String spaceDescription;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +33,8 @@ class ChannelsView extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 6.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: const Image(
-                      image: AssetImage(collabImage),
+                    child: Image(
+                      image: AssetImage(spaceImage),
                     ),
                   ),
                 ),
@@ -46,11 +51,11 @@ class ChannelsView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        children: const [
+                        children: [
                           Expanded(
                               child: Text(
-                            "CollabWorkx space",
-                            style: TextStyle(
+                            spaceName,
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18),
                           )),
                         ],
@@ -58,9 +63,9 @@ class ChannelsView extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      const Text(
-                        "Bring your team's work together",
-                        style: TextStyle(color: Colors.grey),
+                      Text(
+                        spaceDescription,
+                        style: const TextStyle(color: Colors.grey),
                       )
                     ],
                   ),

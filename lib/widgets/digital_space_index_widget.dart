@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class DigitalSpaceIndexWidget extends StatelessWidget {
-  const DigitalSpaceIndexWidget({super.key});
+  const DigitalSpaceIndexWidget(
+      {super.key,
+      required this.spaceTitle,
+      required this.spaceDescription,
+      required this.spaceIndustry,
+      required this.spaceImage});
+  final String spaceTitle;
+  final String spaceDescription;
+  final String spaceIndustry;
+  final String spaceImage;
 
   @override
   Widget build(BuildContext context) {
@@ -15,26 +24,30 @@ class DigitalSpaceIndexWidget extends StatelessWidget {
           children: [
             Container(
               height: 100,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: AssetImage("images/collabworkx.png"),
+                  image: AssetImage(spaceImage),
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 7.0),
+            Padding(
+              padding: const EdgeInsets.only(left: 7.0),
               child: Text(
-                "CollabWorkx",
+                spaceTitle,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 7.0),
-              child: Text("We are innovating to keep businesses connected "),
+            Padding(
+              padding: const EdgeInsets.only(left: 7.0),
+              child: Text(
+                spaceDescription,
+                style: TextStyle(color: Colors.grey.shade600),
+              ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 7.0),
-              child: Text("Computer science"),
+            Padding(
+              padding: const EdgeInsets.only(left: 7.0),
+              child: Text(spaceIndustry),
             ),
             Row(
               children: const [

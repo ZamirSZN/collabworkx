@@ -1,4 +1,4 @@
-import 'package:collabworkx/widgets/collab_Icon_round_button.dart';
+import 'package:collabworkx/widgets/collab_round_icon_button.dart';
 import 'package:collabworkx/widgets/collab_dropdown.dart';
 import 'package:collabworkx/widgets/text_field.dart';
 import 'package:flutter/material.dart';
@@ -7,19 +7,33 @@ Future<void> addSpaceDialog(BuildContext context) {
   return showDialog(
     context: context,
     builder: (BuildContext context) {
-      return AddSpaceDialogContainer();
+      return const AddSpaceDialogContainer();
     },
   );
 }
 
 // showSpaceBottomSheet(context, deviceScreen);
 
-class AddSpaceDialogContainer extends StatelessWidget {
-  AddSpaceDialogContainer({super.key});
+class AddSpaceDialogContainer extends StatefulWidget {
+  const AddSpaceDialogContainer({super.key});
 
+  @override
+  State<AddSpaceDialogContainer> createState() =>
+      _AddSpaceDialogContainerState();
+}
+
+class _AddSpaceDialogContainerState extends State<AddSpaceDialogContainer> {
   final TextEditingController spaceNameTextController = TextEditingController();
+
   final TextEditingController spaceDescriptionTextController =
       TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    spaceNameTextController.dispose();
+    spaceDescriptionTextController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

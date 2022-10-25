@@ -4,30 +4,30 @@ DigitalSpace digitalSpacesFromJson(String str) =>
     DigitalSpace.fromJson(json.decode(str));
 
 class DigitalSpace {
-  int? albumId;
-  int? id;
-  String? title;
-  String? url;
-  String? thumbnailUrl;
+  String? spaceTitle;
+  String? spaceDescription;
+  String? spaceIndustry;
+  String? spaceImage;
+
 
   DigitalSpace(
-      {this.albumId, this.id, this.title, this.url, this.thumbnailUrl});
+      {this.spaceTitle, this.spaceDescription, this.spaceIndustry, this.spaceImage,});
 
   DigitalSpace.fromJson(Map<String, dynamic> json) {
-    albumId = json['albumId'];
-    id = json['id'];
-    title = json['title'];
-    url = json['url'];
-    thumbnailUrl = json['thumbnailUrl'];
+    spaceTitle = json['spaceTitle'];
+    spaceDescription = json['spaceDescription'];
+    spaceIndustry = json['spaceIndustry'];
+    spaceImage = json['spaceImage'];
+    
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['albumId'] = albumId;
-    data['id'] = id;
-    data['title'] = title;
-    data['url'] = url;
-    data['thumbnailUrl'] = thumbnailUrl;
+    data['spaceTitle'] = spaceTitle;
+    data['spaceDescription'] = spaceDescription;
+    data['spaceIndustry'] = spaceIndustry;
+    data['spaceImage'] = spaceImage;
+   
     return data;
   }
 }

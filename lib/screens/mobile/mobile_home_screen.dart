@@ -69,9 +69,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
       body: Stack(
         children: [
           OverlappingPanels(
-            onSideChange: (value) {
-              print(value);
-            },
+            onSideChange: (value) {},
             left: Builder(builder: (context) {
               return const LeftHomePage();
             }),
@@ -103,7 +101,9 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
 
   Widget showCenterPage() {
     if (isChatScreenShown == true) {
-      return const ChatScreen();
+      return const ChatScreen(
+        title: "Space",
+      );
     }
     return const CenterHomePage();
   }

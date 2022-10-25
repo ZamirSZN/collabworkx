@@ -7,7 +7,6 @@ import 'package:collabworkx/widgets/loading_indicator.dart';
 import 'package:collabworkx/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -200,7 +199,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void makePasswordVisible() {
-    print("changing password v");
     if (!_isPasswordVisible) {
       setState(() {
         _isPasswordVisible = true;
